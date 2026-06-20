@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pantanal 3D | Vagner Curupiá</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --verde: #1a5c2a;
+    --verde-claro: #2d7a3a;
+    --azul: #1a4a8a;
+    --azul-claro: #2560b0;
+    --amarelo: #f5c800;
+    --branco: #ffffff;
+    --cinza-claro: #f0f2f5;
+    --texto-escuro: #1a1a2e;
+  }
+
+  html, body {
+    min-height: 100%;
+    font-family: 'Inter', sans-serif;
+    background: var(--cinza-claro);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px 16px 40px;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 420px;
+    background: var(--branco);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    position: relative;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(150deg, var(--verde) 0%, var(--verde-claro) 40%, var(--azul) 100%);
+    padding: 48px 32px 36px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 180px; height: 180px;
+    background: rgba(245,200,0,0.12);
+    border-radius: 50%;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -30px;
+    width: 220px; height: 220px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+  }
+
+  .logo-wrap {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 16px;
+  }
+
+  .logo-wrap img {
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 16px rgba(0,0,0,0.3));
+  }
+
+  .hero-nome {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 28px;
+    color: var(--branco);
+    letter-spacing: -0.5px;
+    position: relative;
+    z-index: 2;
+    line-height: 1.1;
+  }
+
+  .hero-nome span {
+    color: var(--amarelo);
+  }
+
+  .hero-sub {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    margin-top: 6px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-divider {
+    width: 40px;
+    height: 3px;
+    background: var(--amarelo);
+    margin: 14px auto 0;
+    border-radius: 2px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* OWNER */
+  .owner {
+    background: var(--azul);
+    padding: 18px 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .owner-photo {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top center;
+    border: 3px solid var(--amarelo);
+    flex-shrink: 0;
+  }
+
+  .owner-info {
+    flex: 1;
+  }
+
+  .owner-name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--branco);
+  }
+
+  .owner-role {
+    font-size: 12px;
+    color: rgba(255,255,255,0.65);
+    margin-top: 2px;
+    font-weight: 400;
+  }
+
+  .owner-city {
+    font-size: 11px;
+    color: var(--amarelo);
+    margin-top: 3px;
+    font-weight: 500;
+  }
+
+  /* SECTIONS */
+  .section {
+    padding: 24px 24px 8px;
+  }
+
+  .section-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--verde);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e0e5eb;
+  }
+
+  /* LINK BUTTONS */
+  .links {
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .link-btn {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    border-radius: 14px;
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .link-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  }
+
+  .link-btn:active {
+    transform: translateY(0);
+  }
+
+  .link-btn .icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .link-btn .icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .link-btn .text {
+    flex: 1;
+  }
+
+  .link-btn .text strong {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .link-btn .text span {
+    font-size: 11px;
+    opacity: 0.65;
+  }
+
+  .link-btn .arrow {
+    font-size: 16px;
+    opacity: 0.4;
+  }
+
+  /* WhatsApp */
+  .btn-whatsapp {
+    background: #e8f5e9;
+    color: #1b5e20;
+  }
+  .btn-whatsapp .icon { background: #25d366; }
+
+  /* Instagram */
+  .btn-instagram {
+    background: #fce4ec;
+    color: #880e4f;
+  }
+  .btn-instagram .icon { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+
+  /* TikTok */
+  .btn-tiktok {
+    background: #f3f0ff;
+    color: #1a0050;
+  }
+  .btn-tiktok .icon { background: #000000; }
+
+  /* Shopee */
+  .btn-shopee {
+    background: #fff3e0;
+    color: #bf360c;
+  }
+  .btn-shopee .icon { background: #ee4d2d; }
+
+  /* MakerWorld */
+  .btn-makerworld {
+    background: #e3f2fd;
+    color: #0d47a1;
+  }
+  .btn-makerworld .icon { background: var(--azul); }
+
+  /* Cults3D */
+  .btn-cults {
+    background: #fce4ec;
+    color: #880e4f;
+  }
+  .btn-cults .icon { background: #e91e63; }
+
+  /* Email */
+  .btn-email {
+    background: #f1f8e9;
+    color: #33691e;
+  }
+  .btn-email .icon { background: var(--verde); }
+
+  /* FOOTER */
+  .footer {
+    padding: 20px 24px 28px;
+    text-align: center;
+  }
+
+  .footer-tagline {
+    font-size: 11px;
+    color: #999;
+    font-style: italic;
+    margin-bottom: 12px;
+  }
+
+  .footer-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--verde);
+    color: var(--branco);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .footer-brand span {
+    color: var(--amarelo);
+  }
+
+  /* Share button */
+  .share-row {
+    padding: 0 24px 20px;
+    display: flex;
+    gap: 10px;
+  }
+
+  .share-btn {
+    flex: 1;
+    padding: 12px;
+    border-radius: 12px;
+    border: 2px solid var(--verde);
+    background: transparent;
+    color: var(--verde);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: all 0.15s;
+  }
+
+  .share-btn:hover {
+    background: var(--verde);
+    color: var(--branco);
+  }
+
+  .save-btn {
+    flex: 1;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    background: var(--amarelo);
+    color: var(--texto-escuro);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: all 0.15s;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .save-btn:hover {
+    background: #e6b800;
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="logo-wrap">
+      <img src="https://interativo.digital/wp-content/uploads/2025/05/Logo-do-Pantanal-3D-200x200.png" alt="Logo Pantanal 3D">
+    </div>
+    <div class="hero-nome">PANTANAL <span>3D</span></div>
+    <div class="hero-sub">Impressão 3D &amp; Modelagem</div>
+    <div class="hero-divider"></div>
+  </div>
+
+  <!-- OWNER -->
+  <div class="owner">
+    <img
+      class="owner-photo"
+      src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='58' height='58' viewBox='0 0 58 58'%3E%3Ccircle cx='29' cy='29' r='29' fill='%232560b0'/%3E%3Ctext x='29' y='35' text-anchor='middle' fill='white' font-size='22' font-family='Arial'%3EV%3C/text%3E%3C/svg%3E"
+      alt="Vagner Curupiá"
+      id="owner-photo"
+    >
+    <div class="owner-info">
+      <div class="owner-name">Vagner Curupiá</div>
+      <div class="owner-role">Fundador &amp; Designer 3D</div>
+      <div class="owner-city">📍 Campo Grande, MS</div>
+    </div>
+  </div>
+
+  <!-- CONTATO DIRETO -->
+  <div class="section">
+    <div class="section-label">Contato</div>
+  </div>
+  <div class="links">
+    <a href="https://wa.me/5567981132996" class="link-btn btn-whatsapp" target="_blank">
+      <div class="icon">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      </div>
+      <div class="text">
+        <strong>WhatsApp</strong>
+        <span>(67) 98113-2996</span>
+      </div>
+      <div class="arrow">›</div>
+    </a>
+
+    <a href="mailto:vagnerpantanal3d@gmail.com" class="link-btn btn-email">
+      <div class="icon">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      </div>
+      <div class="text">
+        <strong>E-mail</strong>
+        <span>vagnerpantanal3d@gmail.com</span>
+      </div>
+      <div class="arrow">›</div>
+    </a>
+  </div>
+
+  <!-- REDES SOCIAIS -->
+  <div class="section">
+    <div class="section-label">Redes Sociais</div>
+  </div>
+  <div class="links">
+    <a href="https://www.instagram.com/pantanal3d" class="link-btn btn-instagram" target="_blank">
+      <div class="icon">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </div>
+      <div class="text">
+        <strong>Instagram</strong>
+        <span>@pantanal3d</span>
+      </div>
+      <div class="arrow">›</div>
+    </a>
+
+    <a href="https://www.tiktok.com/@pantanal.3d" class="link-btn btn-tiktok" target="_blank">
+      <div class="icon">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.41a8.16 8.16 0 004.77 1.52V7.49a4.85 4.85 0 01-1-.8z"/></svg>
+      </div>
+      <div class="text">
+        <strong>TikTok</strong>
+        <span>@pantanal.3d</span>
+      </div>
+      <div class="arrow">›</div>
+    </a>
+  </div>
+
+  <!-- MARKETPLACE -->
+  <div class="section">
+    <div class="section-label">Loja</div>
+  </div>
+  <div class="links">
+    <a href="https://shopee.com.br/shop/479228241" class="link-btn btn-shopee" target="_blank">
+      <div class="icon">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M12 2C9.243 2 7 4.243 7 7v1H4.072l-.008.085L3 20.085.992 22H23.008L21 20.085 19.936 8.085 19.928 8H17V7c0-2.757-2.243-5-5-5zm0 2c1.654 0 3 1.346 3 3v1H9V7c0-1.654 1.346-3 3-3z"/></svg>
+      </div>
+      <div class="text">
+        <strong>Shopee</strong>
+        <span>Loja Pantanal 3D</span>
+      </div>
+      <div class="arrow">›</div>
+    </a>
+  </div>
+
+  <!-- PARA MAKERS -->
+  <div class="section">
+    <div class="section-label">Para Makers</div>
+  </div>
+  <div class="links" style="margin-bottom: 16px;">
+    <a href="https://makerworld.com/pt/@Pantanal3DD" class="link-btn btn-makerworld" target="_blank">
+      <div class="icon">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <div class="text">
+        <strong>MakerWorld</strong>
+        <span>Modelos 3D gratuitos</span>
+      </div>
+      <div class="arrow">›</div>
+    </a>
+
+    <a href="https://cults3d.com/en/users/Pantanal3D/3d-models" class="link-btn btn-cults" target="_blank">
+      <div class="icon">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+      </div>
+      <div class="text">
+        <strong>Cults3D</strong>
+        <span>Modelos premium</span>
+      </div>
+      <div class="arrow">›</div>
+    </a>
+  </div>
+
+  <!-- AÇÕES -->
+  <div class="share-row">
+    <button class="share-btn" onclick="shareCard()">↗ Compartilhar</button>
+    <a href="https://wa.me/5567981132996" class="save-btn" target="_blank">💬 Falar agora</a>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-tagline">"Transformando ideias em realidade com impressão 3D"</div>
+    <div class="footer-brand">PANTANAL <span>3D</span> · Campo Grande, MS</div>
+  </div>
+
+</div>
+
+<script>
+  function shareCard() {
+    if (navigator.share) {
+      navigator.share({
+        title: 'Pantanal 3D - Vagner Curupiá',
+        text: 'Conheça a Pantanal 3D: impressão 3D e modelagem em Campo Grande, MS.',
+        url: window.location.href
+      });
+    } else {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        alert('Link copiado!');
+      });
+    }
+  }
+</script>
+
+</body>
+</html>
